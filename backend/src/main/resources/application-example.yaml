@@ -1,0 +1,62 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5433/appdb}
+    username: ${SPRING_DATASOURCE_USERNAME:appuser}
+    password: ${SPRING_DATASOURCE_PASSWORD:apppass}
+  
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+    show-sql: false
+  
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  
+  # OAuth2 configuration - uncomment and configure when ready
+  security:
+     oauth2:
+       client:
+         registration:
+           google:
+             client-id: ${GOOGLE_CLIENT_ID:<client id>}
+             client-secret: ${GOOGLE_CLIENT_SECRET:<scret-key>}
+             scope:
+               - openid
+               - profile
+               - email
+             redirect-uri: "{baseUrl}/login/oauth2/code/google"
+  #         azure:
+  #           client-id: ${AZURE_CLIENT_ID:YOUR_AZURE_CLIENT_ID}
+  #           client-secret: ${AZURE_CLIENT_SECRET:YOUR_AZURE_CLIENT_SECRET}
+  #           scope:
+  #             - openid
+  #             - profile
+  #             - email
+  #           redirect-uri: "{baseUrl}/login/oauth2/code/azure"
+  #       provider:
+  #         azure:
+  #           issuer-uri: ${AZURE_ISSUER_URI:https://login.microsoftonline.com/YOUR_TENANT_ID/v2.0}
+
+jwt:
+  issuer: ${JWT_ISSUER:demo-app}
+  secret: ${JWT_SECRET:U9ezXk6Zb7xv2t9z1qCaxYzC0mKnT9VE+4v8hIqaDUg=}
+  expirySeconds: ${JWT_EXPIRY_SECONDS:3600}
+
+cors:
+  allowedOrigins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
