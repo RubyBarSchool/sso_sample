@@ -1,3 +1,7 @@
+# First create account 
+Google: https://console.cloud.google.com/ => create project => create credentials => Create OAuth client ID
+Microsoft: http://portal.azure.com/
+
 # SSO Google & Microsoft - Monorepo
 
 Full-stack monorepo application với authentication qua OAuth2 (Google & Microsoft) và local login.
